@@ -112,7 +112,6 @@ void Phantom::init()
 
     m_page = new WebPage(this, QUrl::fromLocalFile(m_config.scriptFile()));
     m_page->setCookieJar(m_defaultCookieJar);
-    m_pages.append(m_page);
 
     // Set up proxy if required
     QString proxyType = m_config.proxyType();
@@ -495,6 +494,7 @@ void Phantom::doExit(int code)
         page->deleteLater();
     }
     m_pages.clear();
+    delete m_page;
     m_page = 0;
     QApplication::instance()->exit(code);
 }
